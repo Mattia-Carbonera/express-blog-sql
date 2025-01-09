@@ -3,11 +3,30 @@ const connection = require("../data/conn");
 
 // * index
 function index(req, res) {
-  const sql = "SELECT * FROM `posts`.`posts`";
+  // const sqlPosts = "SELECT * FROM `posts`.`posts`";
 
-  // eseguo la query
-  connection.query(sql, (err, results) => {
-    if (err) return res.status(500).json({ error: "Database query failed" });
+  // // eseguo la query
+  // connection.query(sqlPosts, (err, results) => {
+  //   if (err) return res.status(500).json({ error: "Database query failed" });
+  //   res.json(results);
+  // });
+
+  const sqlTags = `
+  SELECT
+	  posts.title,
+    posts.content,
+    posts.image,
+    tags.label
+
+  FROM posts.posts
+
+  INNER JOIN post_tag
+  ON posts.posts.id = post_tag.tag_id
+
+  INNER JOIN tags
+  ON posts.tags.id = post_tag.post_id`;
+
+  connection.query(sqlTags, (err, results) => {
     res.json(results);
   });
 }
