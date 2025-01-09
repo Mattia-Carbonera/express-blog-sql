@@ -1,19 +1,20 @@
 // array di post
 const connection = require("../data/conn");
 
-// # index
+// * index
 function index(req, res) {
-  // const { tag } = req.query;
-  // if (tag) {
-  //   let tagContent = post.filter((post) => post.Tags.includes(tag));
-  //   return res.json(tagContent);
-  // }
-  // res.json(["Visualizzo tutti gli elementi", post]);
+  const sql = "SELECT * FROM `posts`";
+
+  // eseguo la query
+  connection.query(sql, (err, results) => {
+    // if (err) return res.status(500).json({ error: "Database query failed" });
+    res.json(results);
+    console.log(results);
+  });
   console.log("index");
-  res.json("index");
 }
 
-// # show
+// * show
 function show(req, res) {
   // const index = req.params.id;
   // const searchedPost = post.find((post) => post.id.includes(index));
@@ -28,7 +29,7 @@ function show(req, res) {
   res.json("show");
 }
 
-// # store
+// * store
 function store(req, res) {
   // const param = req.body;
   // const newId = parseInt(post.at(-1).id) + 1;
@@ -50,7 +51,7 @@ function store(req, res) {
   // res.json(post);
 }
 
-// # update
+// * update
 function update(req, res) {
   // const index = req.params.id;
   // const param = req.body;
@@ -78,7 +79,7 @@ function update(req, res) {
   // res.json(post);
 }
 
-// # modify
+// * modify
 function modify(req, res) {
   // const index = req.params.id;
   // const param = req.body;
@@ -102,7 +103,7 @@ function modify(req, res) {
   // res.json(post);
 }
 
-// # detroy
+// * detroy
 function detroy(req, res) {
   // const index = parseInt(req.params.id);
   // const selectedPost = post.find(
