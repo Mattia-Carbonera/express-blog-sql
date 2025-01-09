@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 // array di post
-const post = require("../db/postArray");
+// const post = require("../db/postArray");
 
 // postsController
 const postsController = require("../controller/postsController");

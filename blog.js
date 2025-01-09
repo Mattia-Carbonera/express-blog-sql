@@ -4,6 +4,7 @@ const port = 3000;
 
 const menuRouter = require("./routers/myPost");
 const postsRouter = require("./routers/posts");
+
 // middleware
 const errorHandler = require("./middleware/errorHandler.js");
 const notFound = require("./middleware/notFound.js");
