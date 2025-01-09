@@ -3,15 +3,13 @@ const connection = require("../data/conn");
 
 // * index
 function index(req, res) {
-  const sql = "SELECT * FROM `posts`";
+  const sql = "SELECT * FROM `posts`.`posts`";
 
   // eseguo la query
   connection.query(sql, (err, results) => {
-    // if (err) return res.status(500).json({ error: "Database query failed" });
+    if (err) return res.status(500).json({ error: "Database query failed" });
     res.json(results);
-    console.log(results);
   });
-  console.log("index");
 }
 
 // * show
