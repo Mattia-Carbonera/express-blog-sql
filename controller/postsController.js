@@ -14,15 +14,17 @@ function index(req, res) {
 
 // * show
 function show(req, res) {
-  // const index = req.params.id;
-  // const searchedPost = post.find((post) => post.id.includes(index));
-  // console.log(searchedPost);
-  // if (!searchedPost) {
-  //   const err = new Error("Post not found");
-  //   err.code = 404;
-  //   throw err;
-  // }
-  // res.json([`Visualizzo un elemento: ${index}`, searchedPost]);
+  const id = req.params.id;
+
+  const sql = "SELECT * FROM `posts`.`posts` WHERE `id`= ?";
+
+  connection.query(sql, [id], (err, results) => {
+    if (err) return res.status(500).json({ error: "Database query failed" });
+    if (!results.length)
+      return res.status(404).json({ error: "Post not foound" });
+
+    res.json(results);
+  });
 }
 
 // * store
