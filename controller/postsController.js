@@ -23,8 +23,6 @@ function show(req, res) {
   //   throw err;
   // }
   // res.json([`Visualizzo un elemento: ${index}`, searchedPost]);
-  console.log("show");
-  res.json("show");
 }
 
 // * store
@@ -103,21 +101,15 @@ function modify(req, res) {
 
 // * detroy
 function detroy(req, res) {
-  // const index = parseInt(req.params.id);
-  // const selectedPost = post.find(
-  //   (currentPost) => parseInt(currentPost.id) === index
-  // );
-  // // controllo dei post
-  // if (!selectedPost) {
-  //   const err = new Error("Post not found");
-  //   err.code = 404;
-  //   throw err;
-  // }
-  // // -----------
-  // const postIndex = post.indexOf(selectedPost);
-  // const deletedPost = post.splice(postIndex, 1);
-  // console.log(deletedPost);
-  // res.json(post);
+  const id = req.params.id;
+
+  const sql = "DELETE FROM `posts`.`posts` WHERE `id` = ?";
+
+  // eseguo la query
+  connection.query(sql, [id], (err, results) => {
+    if (err) return res.status(500).json({ error: "Database query failed" });
+    if (!err) return res.status(204).json("Operazione completata");
+  });
 }
 
 module.exports = { index, show, store, update, modify, detroy };
